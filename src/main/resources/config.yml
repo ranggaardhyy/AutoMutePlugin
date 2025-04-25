@@ -1,0 +1,15 @@
+# List of banned words
+bannedWords:
+  - anjing
+  - bodoh
+  - kampret
+
+# Default mute duration if no per-word override
+defaultDuration: 10m
+
+# Custom durations per word
+durations:
+# e.g., bodoh: 5m
+
+# Enable logging to data.yml
+logEnabled: true

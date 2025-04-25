@@ -1,0 +1,16 @@
+name: AutoMute
+main: id.boenyy.automute.AutoMutePlugin
+version: 1.1.0
+api-version: "1.21"
+depend: [AdvancedBan]
+
+commands:
+  automute:
+    description: Manage AutoMute settings
+    usage: /<command> <subcommand> [args]
+    permission: automute.admin
+
+permissions:
+  automute.admin:
+    description: Allows use of automute commands
+    default: op

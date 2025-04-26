@@ -8,7 +8,6 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class ChatListener implements Listener {
     private final AutoMutePlugin plugin;

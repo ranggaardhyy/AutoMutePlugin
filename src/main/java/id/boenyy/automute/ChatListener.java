@@ -29,7 +29,7 @@ public class ChatListener implements Listener {
                 FileConfiguration cfg = plugin.getConfig();
                 String duration = cfg.getString("durations." + word, plugin.getDefaultDuration());
                 String reason = "Using banned word: " + word;
-                String cmd = String.format("advancedban:mute %s %s %s", player.getName(), duration, reason);
+                String cmd = String.format("advancedban:tempmute %s %s %s", player.getName(), duration, reason);
 
                 Bukkit.getScheduler().runTask(plugin, () ->
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd)

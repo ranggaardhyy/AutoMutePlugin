@@ -17,7 +17,13 @@ public class AutoMuteCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length < 1) {
-            sender.sendMessage("§cUsage: /automute <addword|removeword|setduration|reload>");
+            sender.sendMessage("§6§lAutoMute Commands:");
+            sender.sendMessage("§e/automute addword <word> §7- Add a banned word");
+            sender.sendMessage("§e/automute removeword <word> §7- Remove a banned word");
+            sender.sendMessage("§e/automute setduration <word> <duration> §7- Set mute duration for a word");
+            sender.sendMessage("§e/automute list §7- Show list of banned word");
+            sender.sendMessage("§e/automute reload §7- Reload plugin configuration");
+            sender.sendMessage("§7Plugin by §bBoenyy");
             return true;
         }
 
@@ -46,6 +52,10 @@ public class AutoMuteCommand implements CommandExecutor {
                 setDuration(sender, args[1], args[2]);
                 break;
 
+            case "list":
+                listBannedWords(sender);
+                break;
+
             case "reload":
                 plugin.reloadSettings();
                 sender.sendMessage("§aConfiguration reloaded.");
@@ -69,6 +79,29 @@ public class AutoMuteCommand implements CommandExecutor {
         plugin.saveConfig();
         plugin.reloadSettings();
         sender.sendMessage("§aBanned word added: " + word);
+    }
+
+    private void listBannedWords(CommandSender sender) {
+        List<String> list = plugin.getBannedWords();
+        if (list.isEmpty()) {
+            sender.sendMessage("§cNo banned words found.");
+            return;
+        }
+
+        FileConfiguration cfg = plugin.getConfig();
+
+        sender.sendMessage("§8===== §bAutoMute Banned Words §8=====");
+        sender.sendMessage("§7Creator: §fBoenyy");
+        sender.sendMessage("§7Total Banned Words: §f" + list.size());
+        sender.sendMessage("§7List:");
+        for (String word : list) {
+            String duration = cfg.getString("durations." + word);
+            if (duration == null) {
+                duration = "default";
+            }
+            sender.sendMessage(" §f- " + word + " (§e" + duration + "§f)");
+        }
+        sender.sendMessage("§8==========================");
     }
 
     private void removeWord(CommandSender sender, String word) {

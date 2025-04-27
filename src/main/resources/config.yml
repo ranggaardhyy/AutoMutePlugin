@@ -1,15 +1,11 @@
-# List of banned words
+# AutoMute Plugin Configuration
+# Made by Boenyy
+
 bannedWords:
-  - anjing
-  - bodoh
-  - kampret
 
-# Default mute duration if no per-word override
-defaultDuration: 10m
+# Default mute duration format:
+# Examples: "10m" (10 minutes), "1h" (1 hour)
+defaultDuration:
 
-# Custom durations per word
-durations:
-# e.g., bodoh: 5m
-
-# Enable logging to data.yml
+# Enable or disable logging to console
 logEnabled: true

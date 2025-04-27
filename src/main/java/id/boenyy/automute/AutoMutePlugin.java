@@ -26,6 +26,8 @@ public class AutoMutePlugin extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new ChatListener(this), this);
         getCommand("automute").setExecutor(new AutoMuteCommand(this));
+        getCommand("automute").setTabCompleter(new AutoMuteTabCompleter(this));
+
 
         getLogger().info("AutoMute v" + getDescription().getVersion() + " enabled.");
     }

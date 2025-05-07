@@ -1,11 +1,30 @@
 # AutoMute Plugin Configuration
-# Made by Boenyy
+# Made by Boenyy gay
 
 bannedWords:
+  - anjing
+  - kontol
+  - memek
+  - lonte
+  - babi
+  - shibal
+  - gay
+  - boenny shibal
+  - zero gay
+  - itsuma gay
 
 # Default mute duration format:
 # Examples: "10m" (10 minutes), "1h" (1 hour)
-defaultDuration:
+defaultDuration: 10m
 
 # Enable or disable logging to console
 logEnabled: true
+
+# Mute command format
+# {player} = player name
+# {duration} = mute duration
+# {reason} = mute reason
+muteCommand: "advancedban:tempmute {player} {duration} {reason}"
+
+
+prefix: "&c[AutoMute] &r"

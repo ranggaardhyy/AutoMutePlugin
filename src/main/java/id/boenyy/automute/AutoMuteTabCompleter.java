@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AutoMuteTabCompleter implements TabCompleter {
+    private static final List<String> SUBCOMMANDS = Arrays.asList("addword", "removeword", "setduration", "reload", "list");
+    private static final List<String> DURATION_EXAMPLES = Arrays.asList("10s", "5m", "10m", "30m", "1h");
+    
     private final AutoMutePlugin plugin;
 
     public AutoMuteTabCompleter(AutoMutePlugin plugin) {
@@ -23,28 +26,30 @@ public class AutoMuteTabCompleter implements TabCompleter {
         }
 
         if (args.length == 1) {
-            return Arrays.asList("addword", "removeword", "setduration", "reload", "list").stream()
-                    .filter(s -> s.startsWith(args[0].toLowerCase()))
-                    .collect(Collectors.toList());
+            return filterStartingWith(SUBCOMMANDS, args[0]);
         }
 
         if (args.length == 2) {
             switch (args[0].toLowerCase()) {
-                case "addword":
-                    return Collections.emptyList();
                 case "removeword":
                 case "setduration":
-                    return plugin.getBannedWords().stream()
-                            .filter(word -> word.startsWith(args[1].toLowerCase()))
-                            .collect(Collectors.toList());
+                    return filterStartingWith(plugin.getBannedWords(), args[1]);
+                case "addword":
+                default:
+                    return Collections.emptyList();
             }
         }
 
         if (args.length == 3 && args[0].equalsIgnoreCase("setduration")) {
-            // Untuk setduration, setelah pilih word -> bisa kasih saran contoh durasi
-            return Arrays.asList("10s", "5m", "10m", "30m", "1h");
+            return DURATION_EXAMPLES;
         }
 
         return Collections.emptyList();
+    }
+    
+    private List<String> filterStartingWith(List<String> options, String prefix) {
+        return options.stream()
+                .filter(s -> s.startsWith(prefix.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }
